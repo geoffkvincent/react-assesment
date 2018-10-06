@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import axios from 'axios'
-import { Grid, Card, Image} from 'semantic-ui-react'
+import { Container, Grid, Card, Image, Icon} from 'semantic-ui-react'
 
 class Breweries extends React.Component {
   state={brews: []}
@@ -8,21 +8,34 @@ class Breweries extends React.Component {
   componentDidMount() {
     axios.get('/api/all_breweries')
       .then(res => this.setState({ brews: res.data.entries }))
+    
   }
 
   render() {
     const { brews } = this.state
     return (
+      <Container>
       <Grid>
         { brews.map( b =>
             <Card key={b.id}>
-            <Image  />       
-              <Card.Header>{b.name}</Card.Header> 
-              <Card.Description>{b.description}</Card.Description>
+              <Image  />     
+                <Card.Content> 
+                  <Card.Header>{b.name}</Card.Header> 
+                  <Card.Meta>{b.brand_classification}</Card.Meta>
+                  <Card.Description>{b.description}</Card.Description>
+
+                </Card.Content> 
+                <Card.Content extra>
+                  <a>
+                    <Icon name='linkify' />
+                    <a href={b.website}>{b.website}</a>
+                  </a>
+                </Card.Content>
             </Card> 
           )
         }                      
       </Grid>
+      </Container>
     )
   }
 }
