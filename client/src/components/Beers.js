@@ -7,7 +7,7 @@ class Beers extends React.Component {
 
   componentDidMount() {
     axios.get('/api/all_beers')
-      .then( res => this.setState({ beers: res.data }) )
+      .then( res => this.setState({ beers: res.data.entries }) )
   }
 
   render() {
@@ -15,7 +15,14 @@ class Beers extends React.Component {
     return (
       <Segment>
         <Card>
-          hello
+        <ul>
+          { beers.map( b =>
+              <li key={b.id}>
+                {b.name}
+              </li>
+            )
+          }
+        </ul>
         </Card>
       </Segment>
     )
