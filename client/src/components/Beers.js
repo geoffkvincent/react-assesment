@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Segment, Card} from 'semantic-ui-react'
+import { Grid, Card, Image} from 'semantic-ui-react'
 
 class Beers extends React.Component {
   state={beers: []}
@@ -13,18 +13,18 @@ class Beers extends React.Component {
   render() {
     const {beers} = this.state
     return (
-      <Segment>
-        <Card>
-        <ul>
-          { beers.map( b =>
-              <li key={b.id}>
-                {b.name}
-              </li>
-            )
-          }
-        </ul>
-        </Card>
-      </Segment>
+      <Grid>
+        { beers.map( b =>
+            <Card key={b.id}>
+              <Image src={b.image} />
+                <Card.Content>   
+                  <Card.Header>{b.name}</Card.Header> 
+                  <Card.Description>{b.description}</Card.Description>
+                </Card.Content>    
+            </Card> 
+          )
+        }                      
+      </Grid>
     )
   }
 
