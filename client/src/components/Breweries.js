@@ -7,10 +7,10 @@ class Breweries extends React.Component {
 
   componentDidMount() {
     axios.get('/api/all_breweries')
-      .then(res => this.setState({ brews: res.data.entries }))
-    
+      .then(res => this.setState({ brews: res.data.entries }) )
   }
 
+  
   render() {
     const { brews } = this.state
     return (
